@@ -1,0 +1,87 @@
+#include<Servo.h>
+#define con 11
+#define sensor A5
+#define smoothness 15 
+Servo servo1;
+Servo servo2;
+Servo servo3;
+Servo servo4;
+Servo servo5;
+Servo servo6;
+void setup() {
+  Serial.begin(9600);
+  pinMode(con,OUTPUT);
+  pinMode(sensor,INPUT);
+  servo1.attach(2);
+  servo2.attach(3);
+  servo3.attach(4);
+  servo4.attach(5);
+  servo5.attach(6);
+  servo6.attach(7);
+  _init_();
+  delay(1000);
+}
+void _init_()
+{
+  servo1.write(150);
+  servo2.write(80);
+  servo3.write(90);
+  servo4.write(160);
+  servo5.write(70);
+  servo6.write(170);
+}
+void Catch()
+{
+  for(int i= 170; i>85 ;i--)
+  {
+    servo6.write(i);
+    delay(smoothness);
+  }
+  for(int i=160; i>120 ;i--)
+  {
+    servo4.write(i);
+    delay(smoothness);
+  }
+  for(int i= 70; i>20 ;i--)
+  {
+    servo5.write(i);
+    delay(smoothness);
+  }
+  servo1.write(0);
+
+}
+void leave()
+{
+  for(int i= 20; i<70 ;i++)
+  {
+    servo5.write(i);
+    delay(smoothness);
+  }
+   for(int i= 85; i<170 ;i++)
+  {
+    servo6.write(i);
+    delay(smoothness);
+  }
+  for(int i=120; i<170 ;i++)
+  {
+    servo4.write(i);
+    delay(smoothness);
+  }
+   servo1.write(180);
+}
+void loop() {
+  digitalWrite(con, HIGH);
+  Serial.println(digitalRead(sensor));
+  if(digitalRead(sensor) == LOW)
+  {
+    digitalWrite(con, LOW);
+    delay(500);
+    Catch();
+    delay(1000);
+    leave();
+    
+  }
+  
+  // put your main code here, to run repeatedly:
+
+}
