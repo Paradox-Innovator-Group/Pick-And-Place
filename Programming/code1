@@ -1,6 +1,6 @@
 #include<Servo.h>
 #define con 11
-#define sensor A5
+#define sensor A3
 #define smoothness 15 
 Servo servo1;
 Servo servo2;
@@ -32,17 +32,18 @@ void _init_()
 }
 void Catch()
 {
-  for(int i= 170; i>85 ;i--)
-  {
-    servo6.write(i);
-    delay(smoothness);
-  }
   for(int i=160; i>120 ;i--)
   {
     servo4.write(i);
     delay(smoothness);
   }
-  for(int i= 70; i>20 ;i--)
+  for(int i= 170; i>85 ;i--)
+  {
+    servo6.write(i);
+    delay(smoothness);
+  }
+  
+  for(int i= 70; i>25 ;i--)
   {
     servo5.write(i);
     delay(smoothness);
@@ -52,7 +53,7 @@ void Catch()
 }
 void leave()
 {
-  for(int i= 20; i<70 ;i++)
+  for(int i= 25; i<70 ;i++)
   {
     servo5.write(i);
     delay(smoothness);
